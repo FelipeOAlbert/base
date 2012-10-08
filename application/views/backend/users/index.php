@@ -1,8 +1,8 @@
 <h1><?=$scr_title?></h1>
 
-<h3>Exibindo <?=$start?> registro(s) de <?=$total_rows?> Encontrado(s)</h3>
+<h3>Exibindo <?=$users['count']?> registro(s) de <?=$total_rows?> Encontrado(s)</h3>
 
-<?php if($rows){ ?>
+<?php if($users['count']){ ?>
 	<table cellpadding="0" cellspacing="0" width="100%" border="0">
 		<thead>
 			<th nowrap>Nome do Usuário</th>
@@ -14,7 +14,7 @@
 		</thead>
 	
 		<tbody>
-			<?php foreach($rows as $row){?>
+			<?php foreach($users['rows'] as $row){?>
 				<tr>
 					<td nowrap><?=$row->name?></td>
 					<td nowrap><?=$row->group_name?></td>
@@ -30,7 +30,7 @@
 		</tbody>
 	</table>
 
-	<?=$this->pagination->create_links();?>
+	<?php echo $pag; ?>
 	<br />
 	
 <?php } else { ?>

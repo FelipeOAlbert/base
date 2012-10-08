@@ -13,7 +13,11 @@ class Users extends CI_Controller{
 	public final function __construct()
 	{
 		parent::__construct();
-		
+		$this->limit =$this->parameter_model->get('rows_per_page');
+		$this->pag_segment = 3;
+		$this->output->enable_profiler(false);
+		$this->user_model->is_logged();
+		$this->total_rows	= $this->user_model->total();
 		$this->url = "/admin/usuarios/";
 		
 		$this->title = array(
@@ -70,7 +74,7 @@ class Users extends CI_Controller{
 		$data['dir']			= 'backend/'.$this->router->class.'/';
 		$data['url_title']		= $this->parameter_model->get('system_title');
 		$data['scr_title']		= $this->title[$method];
-		$data['total_rows']		= $this->user_model->total();
+		$data['total_rows']		= $this->total_rows;
 		
 		$this->load->view('backend/common/header', $data);
 		$this->load->view('backend/'.$this->router->class . '/' . $method, $data);
@@ -79,18 +83,16 @@ class Users extends CI_Controller{
 	
 	public final function index($start = 0)
 	{
-		$this->user_model->is_logged();
-		$rows = $this->user_model->read($start);
-		$data['rows']		= $rows[0];
-		$data['start']		= $rows[1];
+		$this->user_model->is_logged();	
 		
-		$this->pagination->initialize(
-			pagination(
-				$this->url,
-				$this->user_model->total(),
-				$this->parameter_model->get('rows_per_page')
-			)
-		);
+		$this->log($this->router->method);		
+		
+		$data['config'] = pagination_args($this->limit, $this->pag_segment, $this->uri->segment_array());
+		$data['users'] =  $this->user_model->read_pag($this->limit, @$data['config']['page_now'], @$data['config']['search_args']['search_field']);		
+		$data['config'] = pagination_search($this->limit, $this->total_rows, $this->pag_segment, $this->uri->segment_array(),$this->url, $data['config']);
+		
+		$this->pagination->initialize($data['config']);        
+        $data['pag'] = $this->pagination->create_links();
 		
 		$this->render($this->router->method, $data);
 	}
@@ -104,8 +106,7 @@ class Users extends CI_Controller{
 		$data['scr_title']		= $this->title[$this->router->method];
 		$data['groups']			= $this->user_group_model->all();
 		
-		$this->form_validation->set_rules($this->validation);
-		
+		$this->form_validation->set_rules($this->validation);		
 		if($this->form_validation->run() == FALSE){
 			$this->render($this->router->method, $data);
 			$this->session->set_flashdata('message', '<p>' . $this->lang->line('crud_error') . '</p>');

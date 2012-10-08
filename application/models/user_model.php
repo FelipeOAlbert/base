@@ -87,7 +87,42 @@ class User_model extends CI_Model{
 		
 		return false;
 	}
-	
+	public final function read_pag($limit = 0, $page_now = 0, $search = null)
+	{
+		$result = array(
+                'count' => 0,
+                'rows' => array()
+            );
+		 
+		$this->db->select('
+			sys_user.id,
+			sys_user.hash_id,
+			sys_user.name,
+			sys_user.email,
+			sys_group.name as group_name,
+			sys_user.created_in,
+			sys_user.status_id
+		');
+		
+		$this->db->from($this->tablename);
+		$this->db->join('sys_group', 'sys_group.id = sys_user.group_id');
+		$this->db->where(array('sys_user.status_id >' => 0));
+		$this->db->order_by('sys_user.name');
+		if(isset($limit))
+		{
+			 $this->db->limit($limit, $page_now);
+		}
+		
+		$query = $this->db->get();
+		
+		if($query->num_rows() > 0){			
+					$result['rows'] = $query->result();
+				    $result['count'] = $query->num_rows();
+				   return $result;
+		}
+		
+		return false;
+	}
 	public final function all()
 	{
 		$query = $this->db->get($this->tablename);

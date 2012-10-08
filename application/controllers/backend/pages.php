@@ -12,7 +12,7 @@ class Pages extends CI_Controller{
 	
 	public final function __construct()
 	{
-		parent::__construct();
+		parent::__construct();	
 		
 		$this->user_model->is_logged();
 		$this->load->model('page_model', 'data_model');

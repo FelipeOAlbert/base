@@ -216,7 +216,7 @@ td{
 	text-decoration:none;
 	}
 
-.pagination{
+/*.pagination{
 	margin-top:10px;
 	padding-top:5px;
 	border-top:1px solid gray;
@@ -232,7 +232,41 @@ td{
 	border:1px solid #ccc;
 	border-radius:15px;
 	}
+*/
+.pagination{
+	margin-top:10px;
+	padding-top:5px;
+	border-top:1px solid gray;
+	}
 
+.pagination a{
+	margin: 4px;
+	padding-left:3px;
+	padding-right:3px;
+	font-size:10px;
+	color:#000;
+	text-decoration:none;
+	border:1px solid #ccc;
+	border-radius:15px;
+	}
+.pagination a.pagination_active{
+		box-shadow:inset 01px 7px 11px #c7c5c2;
+		color: #000;
+		font-weight: bold;
+		padding-left: 6px;
+		padding-right: 6px;
+		padding-top: 2px;
+		padding-bottom: 2px;
+}
+.pagination a:hover{
+			box-shadow: 0px 1px 7px 1px #c7c5c2;
+		color: red;
+}
+.notifications{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+	}
 .notifications{
 	margin:0px;
 	padding:0px;
