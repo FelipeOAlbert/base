@@ -11,10 +11,14 @@
 		</ul>
 	</li>
 	
-	<li class="top"><a href="#" class="top_link"><span>Páginas</span></a>
+	<li class="top"><a href="#" class="top_link"><span>Gerenciamento de Páginas</span></a>
 		<ul class="sub">
-			<li><a href="<?=site_url();?>admin/paginas/1/80a42656db84020be8e425171db1f757/">Página 1</a></li>
-			<li><a href="<?=site_url();?>admin/paginas/2/c6eba2bb0b1c1e6ad17dc3076b5f5826/">Página 2</a></li>
+			<li><a href="<?=site_url();?>admin/paginas/1/80a42656db84020be8e425171db1f757/">Home</a></li>
+			<li><a href="<?=site_url();?>admin/paginas/2/c6eba2bb0b1c1e6ad17dc3076b5f5826/">Rodas de Tambores</a></li>
+			<li><a href="<?=site_url();?>admin/paginas/2/c6eba2bb0b1c1e6ad17dc3076b5f5826/">Rodas de Tambores Corporativa</a></li>
+			<li><a href="<?=site_url();?>admin/paginas/2/c6eba2bb0b1c1e6ad17dc3076b5f5826/">Histórico Pessoal</a></li>
+			<li><a href="<?=site_url();?>admin/paginas/2/c6eba2bb0b1c1e6ad17dc3076b5f5826/">Artigos e Livros</a></li>
+			<li><a href="<?=site_url();?>admin/paginas/2/c6eba2bb0b1c1e6ad17dc3076b5f5826/">Fotos e Videos</a></li>
 		</ul>
 	</li>
 </ul>

@@ -1,8 +1,8 @@
 <h1><?=$scr_title?></h1>
 
-<h3>Exibindo <?=$start?> registro(s) de <?=$total_rows?> Encontrado(s)</h3>
+<h3>Exibindo <?=$dados['count']?> registro(s) de <?=$total_rows?> Encontrado(s)</h3>
 
-<?php if($rows){ ?>
+<?php if($dados['count']){ ?>
 	<table cellpadding="0" cellspacing="0" width="100%" border="0">
 		<thead>
 			<th nowrap>Nome do Grupo</th>
@@ -12,7 +12,7 @@
 		</thead>
 	
 		<tbody>
-			<?php foreach($rows as $row){?>
+			<?php foreach($dados['rows'] as $row){?>
 				<tr>
 					<td nowrap><?=$row->name?></td>
 					<td nowrap><?=format_date($row->created_in)?></td>
@@ -26,7 +26,7 @@
 		</tbody>
 	</table>
 
-	<?=$this->pagination->create_links();?>
+	<?php echo $pag; ?>
 	<br />
 	
 <?php } else { ?>

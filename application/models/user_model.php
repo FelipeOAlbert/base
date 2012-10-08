@@ -87,6 +87,7 @@ class User_model extends CI_Model{
 		
 		return false;
 	}
+	
 	public final function read_pag($limit = 0, $page_now = 0, $search = null)
 	{
 		$result = array(
@@ -123,6 +124,7 @@ class User_model extends CI_Model{
 		
 		return false;
 	}
+	
 	public final function all()
 	{
 		$query = $this->db->get($this->tablename);

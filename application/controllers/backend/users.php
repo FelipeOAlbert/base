@@ -13,10 +13,11 @@ class Users extends CI_Controller{
 	public final function __construct()
 	{
 		parent::__construct();
-		$this->limit =$this->parameter_model->get('rows_per_page');
+		
+		$this->limit = $this->parameter_model->get('rows_per_page');
 		$this->pag_segment = 3;
 		$this->output->enable_profiler(false);
-		$this->user_model->is_logged();
+		
 		$this->total_rows	= $this->user_model->total();
 		$this->url = "/admin/usuarios/";
 		

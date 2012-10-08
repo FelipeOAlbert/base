@@ -44,6 +44,34 @@ class User_group_model extends CI_Model{
 		return $this->db->count_all_results($this->tablename);
 	}
 	
+	public final function read_pag($limit = 0, $page_now = 0, $search = null)
+	{
+		$result = array(
+                'count' => 0,
+                'rows' => array()
+            );
+		 
+		$this->db->select('*');
+		$this->db->from($this->tablename);
+		$this->db->where(array('status_id' => 1));
+		$this->db->order_by('name');
+		
+		if(isset($limit))
+		{
+			$this->db->limit($limit, $page_now);
+		}
+		
+		$query = $this->db->get();
+		
+		if($query->num_rows() > 0){			
+			$result['rows'] = $query->result();
+			$result['count'] = $query->num_rows();
+			return $result;
+		}
+		
+		return false;
+	}
+	
 	public final function read($start=0)
 	{
 		$query = $this->db->get_where($this->tablename, array('status_id' => 1), $this->per_page, $start);

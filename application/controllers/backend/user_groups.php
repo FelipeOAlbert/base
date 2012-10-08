@@ -18,6 +18,10 @@ class User_groups extends CI_Controller{
 		$this->load->model('user_group_model', 'data_model');
 		$this->url = '/admin/grupos/';
 		
+		$this->limit = $this->parameter_model->get('rows_per_page');
+		$this->pag_segment = 3;
+		$this->total_rows	= $this->data_model->total();
+		
 		$this->title = array(
 			'index'		=> $this->lang->line('backend/'.$this->router->class . '_index'),
 			'create'	=> $this->lang->line('backend/'.$this->router->class . '_create'),
@@ -30,11 +34,6 @@ class User_groups extends CI_Controller{
 				'label'	=> 'Nome', 
 				'rules'	=> 'required'
 			),
-			//array(
-			//	'field'	=> 'value', 
-			//	'label'	=> 'Valor', 
-			//	'rules'	=> 'required'
-			//),
 			array(
 				'field'	=> 'status_id', 
 				'label'	=> 'Status', 
@@ -73,16 +72,13 @@ class User_groups extends CI_Controller{
 		
 		$data['url_title']	= $this->parameter_model->get('system_title');
 		$data['scr_title']	= $this->title[$this->router->method];
-		$data['rows']		= $rows[0];
-		$data['start']		= $rows[1];
 		
-		$this->pagination->initialize(
-			pagination(
-				$this->url,
-				$this->data_model->total(),
-				$this->parameter_model->get('rows_per_page')
-			)
-		);
+		$data['config']		= pagination_args($this->limit, $this->pag_segment, $this->uri->segment_array());
+		$data['dados'] 		=  $this->parameter_model->read_pag($this->limit, @$data['config']['page_now'], @$data['config']['search_args']['search_field']);		
+		$data['config']		= pagination_search($this->limit, $this->total_rows, $this->pag_segment, $this->uri->segment_array(),$this->url, $data['config']);
+		
+		$this->pagination->initialize($data['config']);        
+        $data['pag'] 		= $this->pagination->create_links();
 		
 		$this->render($this->router->method, $data);
 	}
