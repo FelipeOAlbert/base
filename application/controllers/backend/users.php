@@ -56,6 +56,19 @@ class Users extends CI_Controller{
 				'rules'	=> 'required'
 			)
 		);
+		
+		$this->validation_login = array(
+			array(
+				'field'	=> 'username', 
+				'label'	=> '', 
+				'rules'	=> 'trim|required|xss_clean'
+			),
+			array(
+				'field'	=> 'password', 
+				'label'	=> '', 
+				'rules'	=> 'trim|required|xss_clean|alpha_numeric'
+			)
+		);
 	}
 	
 	private final function log($method)
@@ -161,22 +174,31 @@ class Users extends CI_Controller{
 	
 	public final function login()
 	{
-		if(!$_POST){
-			$this->log('login');
-
-			$data['url']			= $this->url;
-			$data['dir']			= 'backend/'.$this->router->class.'/';
-			$data['url_title']		= $this->parameter_model->get('system_title');
-			$data['scr_title']		= $this->title['login'];
+		$this->log($this->router->method);
+		
+		$data['url_title']	= $this->parameter_model->get('system_title');
+		$data['scr_title']	= $this->title[$this->router->method];
+		
+		$this->form_validation->set_rules($this->validation_login);
+		
+		if($this->form_validation->run() == FALSE){
 			
-			$this->load->view('/backend/users/login', $data);
+			if($_POST){
+				$data['alert']['message'] = 'Preencha os campos corretamente!';
+			}
 		} else {
-			if($this->user_model->login($_POST['email'], $_POST['password'])){
-				redirect('/admin/usuarios');
-			} else {
-				redirect('/admin');
+			
+			die('true');
+			
+			if($this->data_model->create()){
+				$data['alert']['message'] = '<p>' . $this->lang->line('crud_insert_success') . '</p>';
+				$data['alert']['redirect'] = site_url($this->url);
+			}else{
+				$data['alert']['message'] = '<p>' . $this->lang->line('crud_insert_fail') . '</p>';
 			}
 		}
+		
+		$this->render($this->router->method, $data);
 	}
 	
 	public final function logout()

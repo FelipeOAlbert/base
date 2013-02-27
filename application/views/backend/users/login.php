@@ -1,47 +1,47 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-<html lang="en">
-<head>
-	<!-- Meta Tags -->
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta name="generator" content="Komodo">
-	<meta name="author" content="<?=$this->parameter_model->get('author');?>">
+<div class="container-fluid">
+	<div class="row-fluid">
 	
-	<!-- Título da Página -->
-	<title><?=$url_title?></title>
-	
-	<!-- Estilos CSS -->
-	<link rel="stylesheet" type="text/css" href="<?=site_url();?>resources/css/jquery-ui/ui-darkness/jquery-ui-1.8.16.custom.css">
-	<link rel="stylesheet" type="text/css" href="<?=site_url();?>resources/css/styles.css" />
-	
-	<!-- Javascripts -->
-	<script type="text/javascript" src="<?=site_url();?>resources/js/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="<?=site_url();?>resources/js/functions.js"></script>
-</head>
-<body onload="init();" class="login_bg">
-	<div class="login_base">><?=$this->parameter_model->get('company_name');?></div>
-	
-	<div class="login_container">
-		<div>
-			<h1><?=$scr_title?></h1>
-
-			<form method="post">
-				<div>
-					<label for="email"><?=$this->lang->line('login_email');?>:</label>
-					<input ytpe="text" name="email" id="email" class="input"/>
+		<div class="row-fluid">
+			<div class="span12 center login-header">
+				<h2><?=$scr_title?></h2>
+			</div>
+		</div>
+		
+		<div class="row-fluid">
+			<div class="well span5 center login-box">
+				<div class="alert alert-info">
+					Por favor, faça o login com seu usuário e senha.
 				</div>
-	
-				<div>
-					<label for="password"><?=$this->lang->line('login_password');?>:</label>
-					<input type="password" name="password" id="password" class="input"/>
+				
+				<? if(isset($alert)){  ?>
+				<div class="alert alert-block">
+					<h4 class="alert-heading">Atenção!</h4>
+					<p>Falha na autenticação. Preencha os campos corretamente!</p>
 				</div>
-					
-				<div>
-					<label for="submit"></label>
-					<input type="submit" name="submit" id="submit" value="<?=$this->lang->line('button_proceed');?>" class="button" />
-				</div>
-			</form>
+				<? } ?>
+				
+				<form class="form-horizontal" action="" method="post">
+					<fieldset>
+						<div class="input-prepend" title="Usuário" data-rel="tooltip">
+							<span class="add-on"><i class="icon-user"></i></span><input autofocus class="input-large span10" name="username" id="username" type="text" value="" />
+						</div>
+						<div class="clearfix"></div>
+						
+						<div class="input-prepend" title="Senha" data-rel="tooltip">
+							<span class="add-on"><i class="icon-lock"></i></span><input class="input-large span10" name="password" id="password" type="password" value="" />
+						</div>
+						<div class="clearfix"></div>
+						
+						<div class="input-prepend">
+						<label class="remember" for="remember"><input type="checkbox" id="remember" />Lembrar</label>
+						</div>
+						<div class="clearfix"></div>
+						
+						<p class="center span5">
+						<button type="submit" class="btn btn-primary">Login</button>
+						</p>
+					</fieldset>
+				</form>
+			</div>
 		</div>
 	</div>
-</body>
-</html>

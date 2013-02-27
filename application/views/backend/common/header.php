@@ -1,66 +1,42 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-<html lang="en">
 <head>
-	<!-- Meta Tags -->
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta name="author" content="<?=$this->parameter_model->get('author');?> ">
-	
-	<!-- Título da Página -->
-	<title><?=$url_title?></title>
-	
-	<!-- Estilos CSS -->
-	<link rel="stylesheet" type="text/css" href="<?=site_url();?>resources/css/jquery-ui/ui-darkness/jquery-ui-1.8.16.custom.css">
-	<link rel="stylesheet" type="text/css" href="<?=site_url();?>resources/css/styles.css" />
-	
-	<!-- Javascripts -->
-	<script type="text/javascript" src="<?=site_url();?>resources/js/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="<?=site_url();?>resources/js/jquery-ui-1.8.16.custom.min.js"></script>
-	<script type="text/javascript" src="<?=site_url();?>resources/js/jquery.maskedinput.js"></script>
-	<script type="text/javascript" src="<?=site_url();?>resources/js/jquery.price_format.1.3.js"></script>
-	<script type="text/javascript" src="<?=site_url();?>resources/js/jquery.numeric.js"></script>
-	<script type="text/javascript" src="<?=site_url();?>resources/js/input.core.js"></script>
-	<script type="text/javascript" src="<?=site_url();?>resources/js/tiny_mce/tiny_mce.js"></script>
-	<script type="text/javascript" src="<?=site_url();?>resources/js/functions.js"></script>
-	<!--<script type="text/javascript" src="<?=site_url();?>plugins/jquery-validation/jquery.validate.js"></script>-->
-	
-	
-	<!--<script type="text/javascript" src="<?=site_url();?>resources/js/validate_form_register.js"></script>-->
-	<script type="text/javascript">
-	tinyMCE.init({
-			mode : "textareas"
-	});
-	</script>
-
-</head>
-<body onload="init('<?=site_url();?>');">
-	<!-- Confirmação de Exclusão -->
-	<div class="modal" id="delete_confirm" title="Mensagem do Sistema" style="display:none;">
-		<p>
-			<strong>Tem certeza que deseja excluir este registro?</strong><br />
-			<div>Esta ação não poderá ser desfeita e o registro não será recuperado, sendo necessário o cadastramento de um novo registro no caso de erros.</div>
-		</p>
-	</div>
-	
-	<!-- Mensagens do Sistema -->
-	<?php if($this->session->flashdata('message')){?>
-	<div id="messages"><?=$this->session->flashdata('message');?></div>
-	<?php } ?>
-	
-	<? if($this->session->userdata('user_logged')){?>
-	<div id="top">
-		<div class="logo"><?=$this->parameter_model->get('company_name');?> </div>
-		<!--<div class="alerts">Você possui <strong>5</strong> ações para aprovar!</div>-->
-		<div class="user">
-			Olá, <?=$this->session->userdata('user_name')?> | 
-			<!--<a href="<?=site_url()?>admin/perfil">meu perfil</a> | -->
-			<a href="<?=site_url()?>admin/sair">sair</a>
-		</div>
-	</div>
-	
-	<?$this->load->view('backend/common/menu');?>
-	
-	<? } ?>
-	
-	<div class="container">
 		
+	<meta charset="utf-8">
+	<title><?=$url_title?></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="<?=$this->parameter_model->get('author');?>">
+
+	<link id="bs-css" href="<?=site_url('resources/css/bootstrap-classic.css');?>" rel="stylesheet">
+	<style type="text/css">
+	  body {
+		padding-bottom: 40px;
+	  }
+	  .sidebar-nav {
+		padding: 9px 0;
+	  }
+	</style>
+	<link href="<?=site_url('resources/css/bootstrap-responsive.css');?>" rel="stylesheet">
+	<link href="<?=site_url('resources/css/charisma-app.css');?>" rel="stylesheet">
+	<link href="<?=site_url('resources/css/jquery-ui-1.8.21.custom.css');?>" rel="stylesheet">
+	<link href='<?=site_url('resources/css/fullcalendar.css');?>' rel='stylesheet'>
+	<link href='<?=site_url('resources/css/fullcalendar.print.css');?>' rel='stylesheet'  media='print'>
+	<link href='<?=site_url('resources/css/chosen.css');?>' rel='stylesheet'>
+	<link href='<?=site_url('resources/css/uniform.default.css');?>' rel='stylesheet'>
+	<link href='<?=site_url('resources/css/colorbox.css');?>' rel='stylesheet'>
+	<link href='<?=site_url('resources/css/jquery.cleditor.css');?>' rel='stylesheet'>
+	<link href='<?=site_url('resources/css/jquery.noty.css');?>' rel='stylesheet'>
+	<link href='<?=site_url('resources/css/noty_theme_default.css');?>' rel='stylesheet'>
+	<link href='<?=site_url('resources/css/elfinder.min.css');?>' rel='stylesheet'>
+	<link href='<?=site_url('resources/css/elfinder.theme.css');?>' rel='stylesheet'>
+	<link href='<?=site_url('resources/css/jquery.iphone.toggle.css');?>' rel='stylesheet'>
+	<link href='<?=site_url('resources/css/opa-icons.css');?>' rel='stylesheet'>
+	<link href='<?=site_url('resources/css/uploadify.css');?>' rel='stylesheet'>
+
+	<!--[if lt IE 9]>
+	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- The fav icon -->
+	<!--<link rel="shortcut icon" href="img/favicon.ico">-->
+</head>
+<body>
